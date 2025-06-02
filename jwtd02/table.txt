@@ -1,0 +1,39 @@
+CREATE DATABASE springsecuritydb;
+USE springsecuritydb;
+--
+CREATE TABLE user (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL
+);
+
+#------------------------
+http://localhost:8081/auth/signup
+{
+  "email": "ram@example.com",
+  "name": "ram Saha",
+  "username": "ram",
+  "password": "ram",
+  "role": "ROLE_ADMIN"
+}
+---
+http://localhost:8081/auth/login
+POST REQUEST
+
+{
+  "username": "tanmoy",
+  "password": "tanmoy"
+}
+-----------------------------------------------
+Response
+{
+    "username": "tanmoy",
+    "jwtToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0YW5tb3kiLCJpYXQiOjE3NDg2MjYyNjcsImV4cCI6MTc0ODYyOTI2N30.JHIozgTrpX45G7jqsldiW2KK9EBXcjAGrkQJlkiqsUA",
+    "role": "ROLE_ADMIN"
+}
+-----------------------------
+http://localhost:8081/home
+Welcome to the Home Page. You are authenticated.
